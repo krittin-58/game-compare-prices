@@ -379,7 +379,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(deal, index) in gamesLoadDeals" :key="index">
+                    <tr v-for="(deal, index) in gamesloadDeals" :key="index">
                       <td>{{ deal.title }}</td>
                       <td class="text-decoration-line-through">{{ deal.normalPrice }}</td>
                       <td><v-chip small>{{ deal.salePrice }}</v-chip></td>
@@ -547,119 +547,21 @@
 
 <script>
   import cheapshark from '@/api/cheapshark/index'
+  import { mapGetters, mapState } from 'vuex'
   export default {
     name: 'Home',
     components: {},
     data () {
-      return {
-        listGames: [],
-        listDeals: [],
-        listStores: [],
-
-        steam: [], 
-        humblebundle: [], 
-        gamerGate: [], 
-        greenManGaming: [], 
-        direct2Drive: [], 
-        gog: [],
-        origin: [],
-        ubisoft: [],
-        fanatical: [],
-        wingamestore: [],
-        gameBillet: [],
-        voidu: [],
-        epicGameStore: [],
-        gamePlanet: [],
-        gamesload: [],
-        twoGames: [],
-        indieGala: [],
-        blizzardShop: [],
-        allYouPlay: [],
-        dlGamer: [],
-        noctre: [],
-      }
+      return {}
     },
 
     computed: {
-      steamDeals () {
-        return this.steam.splice(0, 5)
-      },
-
-      humbleDeals () {
-        return this.humblebundle.splice(0, 5)
-      },
-
-      gamerGateDeals () {
-        return this.gamerGate.splice(0, 5)
-      },
-
-      greenManGamingDeals () {
-        return this.greenManGaming.splice(0, 5)
-      },
-
-      direct2DriveDeals () {
-        return this.direct2Drive.splice(0, 5)
-      },
-
-      gogDeals () {
-        return this.gog.splice(0, 5)
-      },
-
-      originDeals () {
-        return this.origin.splice(0, 5)
-      },
-
-      ubisoftDeals () {
-        return this.ubisoft.splice(0, 5)
-      },
-
-      fanaticalDeals () {
-        return this.fanatical.splice(0, 5)
-      },
-
-      gameBilletDeals () {
-        return this.gameBillet.splice(0, 5)
-      },
-
-      voiduDeals () {
-        return this.voidu.splice(0, 5)
-      },
-
-      epicDeals () {
-        return this.epicGameStore.splice(0, 5)
-      },
-
-      gamePlanetDeals () {
-        return this.gamePlanet.splice(0, 5)
-      },
-
-      gamesLoadDeals () {
-        return this.gamesload.splice(0, 5)
-      },
-
-      twoGamesDeals () {
-        return this.twoGames.splice(0, 5)
-      },
-
-      indieGalaDeals () {
-        return this.indieGala.splice(0, 5)
-      },
-
-      blizzardDeals () {
-        return this.blizzardShop.splice(0, 5)
-      },
-
-      allYouPlayDeals () {
-        return this.allYouPlay.splice(0, 5)
-      },
-
-      dlGamerDeals () {
-        return this.dlGamer.splice(0, 5)
-      },
-
-      noctreDeals () {
-        return this.noctre.splice(0, 5)
-      },
+      ...mapState(['listStores']),
+      ...mapGetters([
+        'steamDeals', 'humbleDeals', 'gamerGateDeals', 'greenManGamingDeals', 'direct2DriveDeals', 'gogDeals',
+        'originDeals', 'ubisoftDeals', 'fanaticalDeals', 'gameBilletDeals', 'voiduDeals', 'epicDeals', 'gamePlanetDeals',
+        'gamesloadDeals', 'twoGamesDeals', 'indieGalaDeals', 'blizzardDeals', 'allYouPlayDeals', 'dlGamerDeals', 'noctreDeals'
+      ]),
 
       filterStoreIsActive () {
         return this.listStores.filter((data) => {
@@ -678,51 +580,62 @@
     methods: {
 
       async getAllDeals () {
-        const response = await cheapshark.gameDeals()
-        const steamDeals = await cheapshark.gameDeals({ storeID: 1})
-        const humblebundle = await cheapshark.gameDeals({ storeID: 11 })
-        const gamerGate = await cheapshark.gameDeals({ storeID: 2 })
-        const greenManGaming = await cheapshark.gameDeals({ storeID: 3 })
-        const direct2Drive = await cheapshark.gameDeals({ storeID: 6 })
-        const gog = await cheapshark.gameDeals({ storeID: 7})
-        const origin = await cheapshark.gameDeals({ storeID: 8 })
-        const ubisoft = await cheapshark.gameDeals({ storeID: 13 })
-        const fanatical = await cheapshark.gameDeals({ storeID: 15 })
-        const wingamestore = await cheapshark.gameDeals({ storeID: 21 })
-        const gameBillet = await cheapshark.gameDeals({ storeID: 23 })
-        const voidu = await cheapshark.gameDeals({ storeID: 24 })
-        const epic = await cheapshark.gameDeals({ storeID: 25 })
-        const gamePlanet = await cheapshark.gameDeals({ storeID: 27 })
-        const gamesload = await cheapshark.gameDeals({ storeID: 28 })
-        const twoGames = await cheapshark.gameDeals({ storeID: 29 })
-        const indieGala = await cheapshark.gameDeals({ storeID: 30 })
-        const blizzardShop = await cheapshark.gameDeals({ storeID: 31 })
-        const allYouPlay = await cheapshark.gameDeals({ storeID: 32 })
-        const dlGamer = await cheapshark.gameDeals({ storeID: 33 })
-        const noctre = await cheapshark.gameDeals({ storeID: 34 })
+        let unixTimeToday = new Date().toDateString()
+        localStorage.setItem('date', unixTimeToday)
 
-        const nameStores = [ 
-          steamDeals, humblebundle, gamerGate, greenManGaming, direct2Drive, 
-          gog, origin, ubisoft, fanatical, wingamestore, gameBillet, voidu, epic,
-          gamePlanet, gamesload, twoGames, indieGala, blizzardShop, allYouPlay, dlGamer,
-          noctre
-        ]
-
-        const nameArray = [
-          'steam', 'humblebundle', 'gamerGate', 'greenManGaming', 'direct2Drive', 
-          'gog', 'origin', 'ubisoft', 'fanatical', 'wingamestore', 'gameBillet',
-          'voidu', 'epicGameStore', 'gamePlanet', 'gamesload', 'twoGames', 'indieGala', 'blizzardShop',
-          'allYouPlay', 'dlGamer', 'noctre'
-        ]
-
-        if (response) {
-          this.listDeals = response
-        }
+        let vuexLocalStorage = localStorage.getItem('vuex')
+        let dateLocalStorage = localStorage.getItem('date')
         
-        for (let i = 0; nameStores[i] ? nameStores[i].length : 0; i++) {
-          if (nameStores[i]) {
-            this[nameArray[i]] = await nameStores[i]
-            // this.$store.commit(nameArray[i], nameStores[i])
+        if (!vuexLocalStorage || (dateLocalStorage !== unixTimeToday)) {
+
+          localStorage.setItem('date', unixTimeToday)
+
+          const response = await cheapshark.gameDeals()
+          const steamDeals = await cheapshark.gameDeals({ storeID: 1})
+          const humblebundle = await cheapshark.gameDeals({ storeID: 11 })
+          const gamerGate = await cheapshark.gameDeals({ storeID: 2 })
+          const greenManGaming = await cheapshark.gameDeals({ storeID: 3 })
+          const direct2Drive = await cheapshark.gameDeals({ storeID: 6 })
+          const gog = await cheapshark.gameDeals({ storeID: 7})
+          const origin = await cheapshark.gameDeals({ storeID: 8 })
+          const ubisoft = await cheapshark.gameDeals({ storeID: 13 })
+          const fanatical = await cheapshark.gameDeals({ storeID: 15 })
+          const wingamestore = await cheapshark.gameDeals({ storeID: 21 })
+          const gameBillet = await cheapshark.gameDeals({ storeID: 23 })
+          const voidu = await cheapshark.gameDeals({ storeID: 24 })
+          const epic = await cheapshark.gameDeals({ storeID: 25 })
+          const gamePlanet = await cheapshark.gameDeals({ storeID: 27 })
+          const gamesload = await cheapshark.gameDeals({ storeID: 28 })
+          const twoGames = await cheapshark.gameDeals({ storeID: 29 })
+          const indieGala = await cheapshark.gameDeals({ storeID: 30 })
+          const blizzardShop = await cheapshark.gameDeals({ storeID: 31 })
+          const allYouPlay = await cheapshark.gameDeals({ storeID: 32 })
+          const dlGamer = await cheapshark.gameDeals({ storeID: 33 })
+          const noctre = await cheapshark.gameDeals({ storeID: 34 })
+
+          const nameStores = [ 
+            steamDeals, humblebundle,  gamerGate,greenManGaming, direct2Drive, 
+            gog, origin, ubisoft, fanatical, wingamestore, gameBillet, voidu, epic, gamePlanet, 
+            gamesload, twoGames, indieGala, blizzardShop, allYouPlay, dlGamer,
+            noctre
+          ]
+
+          const nameArray = [
+            'steam', 'humblebundle', 'gamerGate', 'greenManGaming', 'direct2Drive', 
+            'gog', 'origin', 'ubisoft', 'fanatical', 'wingamestore', 'gameBillet',
+            'voidu', 'epicGameStore', 'gamePlanet', 'gamesload', 'twoGames', 'indieGala', 'blizzardShop',
+            'allYouPlay', 'dlGamer', 'noctre'
+          ]
+
+          if (response) {
+            this.$store.commit('listDeals', response)
+          }
+          
+          for (let i = 0; nameStores[i] ? nameStores[i].length : 0; i++) {
+            if (nameStores[i]) {
+              this[nameArray[i]] = await nameStores[i]
+              this.$store.commit(nameArray[i], nameStores[i])
+            }
           }
         }
       },
@@ -730,7 +643,7 @@
       async getAllStores () {
         const response = await cheapshark.storeInfo()
         if (response) {
-          this.listStores = response
+          this.$store.commit('listStores', response)
         }
       },
 
