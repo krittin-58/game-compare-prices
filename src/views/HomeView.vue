@@ -722,6 +722,7 @@
         for (let i = 0; nameStores[i] ? nameStores[i].length : 0; i++) {
           if (nameStores[i]) {
             this[nameArray[i]] = await nameStores[i]
+            // this.$store.commit(nameArray[i], nameStores[i])
           }
         }
       },
