@@ -1,8 +1,8 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col md="4" sm="6" xs="12" v-for="(store, index) in filterStoreIsActive" :key="index">
-        <v-card class="d-flex flex-no-wrap justify-space-between">
+  <v-container fluid>
+    <v-row no-gutters>
+      <v-col md="4" sm="12" xs="12" lg="4" v-for="(store, index) in filterStoreIsActive" :key="index">
+        <v-card class="d-flex flex-no-wrap justify-space-between" flat tile>
           <v-img class="ma-1" width="80" height="80" aspect-ratio="1" :src="setupImageURL(store.images.logo)" :lazy-src="setupImageURL(store.images.logo)">
             <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
@@ -13,9 +13,10 @@
           <v-divider></v-divider>
           <v-card-text>
             <v-card-title class="text-h5">{{ store.storeName }}</v-card-title>
+            <v-skeleton-loader v-if="loading" :loading="loading" type="table-heading@5"></v-skeleton-loader>
             <!-- Steam -->
-            <template v-if="store.storeName == 'Steam'">
-              <v-simple-table dense >
+            <template v-if="store.storeName == 'Steam' && !loading">
+              <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
                     <tr>
@@ -39,7 +40,7 @@
               </v-simple-table>
             </template>
             <!-- Humble Store -->
-            <template v-if="store.storeName == 'Humble Store'">
+            <template v-if="store.storeName == 'Humble Store'  && !loading">
               <v-simple-table dense >
                 <template v-slot:default>
                   <thead>
@@ -64,7 +65,7 @@
               </v-simple-table>
             </template>
             <!-- GamersGate -->
-            <template v-if="store.storeName == 'GamersGate'">
+            <template v-if="store.storeName == 'GamersGate'  && !loading">
               <v-simple-table dense >
                 <template v-slot:default>
                   <thead>
@@ -89,7 +90,7 @@
               </v-simple-table>
             </template>
             <!-- GreenManGaming -->
-            <template v-if="store.storeName == 'GreenManGaming'">
+            <template v-if="store.storeName == 'GreenManGaming'  && !loading">
               <v-simple-table dense >
                 <template v-slot:default>
                   <thead>
@@ -114,7 +115,7 @@
               </v-simple-table>
             </template>
             <!-- Direct2Drive -->
-            <template v-if="store.storeName == 'Direct2Drive'">
+            <template v-if="store.storeName == 'Direct2Drive'  && !loading">
               <v-simple-table dense >
                 <template v-slot:default>
                   <thead>
@@ -139,7 +140,7 @@
               </v-simple-table>
             </template>
             <!-- GOG -->
-            <template v-if="store.storeName == 'GOG'">
+            <template v-if="store.storeName == 'GOG'  && !loading">
               <v-simple-table dense >
                 <template v-slot:default>
                   <thead>
@@ -164,7 +165,7 @@
               </v-simple-table>
             </template>
             <!-- Origin -->
-            <template v-if="store.storeName == 'Origin'">
+            <template v-if="store.storeName == 'Origin'  && !loading">
               <v-simple-table dense >
                 <template v-slot:default>
                   <thead>
@@ -189,7 +190,7 @@
               </v-simple-table>
             </template>
             <!-- Ubisoft Uplay -->
-            <template v-if="store.storeName == 'Uplay'">
+            <template v-if="store.storeName == 'Uplay'  && !loading">
               <v-simple-table dense >
                 <template v-slot:default>
                   <thead>
@@ -214,7 +215,7 @@
               </v-simple-table>
             </template>
             <!-- Fanatical -->
-            <template v-if="store.storeName == 'Fanatical'">
+            <template v-if="store.storeName == 'Fanatical'  && !loading">
               <v-simple-table dense >
                 <template v-slot:default>
                   <thead>
@@ -239,7 +240,7 @@
               </v-simple-table>
             </template>
             <!-- WinGameStore -->
-            <template v-if="store.storeName == 'WinGameStore'">
+            <template v-if="store.storeName == 'WinGameStore'  && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -264,7 +265,7 @@
               </v-simple-table>
             </template>
             <!-- GameBillet -->
-            <template v-if="store.storeName == 'GameBillet'">
+            <template v-if="store.storeName == 'GameBillet'  && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -289,7 +290,7 @@
               </v-simple-table>
             </template>
             <!-- Voidu -->
-            <template v-if="store.storeName == 'Voidu'">
+            <template v-if="store.storeName == 'Voidu' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -314,7 +315,7 @@
               </v-simple-table>
             </template>
             <!-- Epic Game Store -->
-            <template v-if="store.storeName == 'Epic Games Store'">
+            <template v-if="store.storeName == 'Epic Games Store' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -339,7 +340,7 @@
               </v-simple-table>
             </template>
             <!-- Game Planet -->
-            <template v-if="store.storeName == 'Gamesplanet'">
+            <template v-if="store.storeName == 'Gamesplanet' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -364,7 +365,7 @@
               </v-simple-table>
             </template>
             <!-- GamesLoad -->
-            <template v-if="store.storeName == 'Gamesload'">
+            <template v-if="store.storeName == 'Gamesload' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -389,7 +390,7 @@
               </v-simple-table>
             </template>
             <!-- 2Game -->
-            <template v-if="store.storeName == '2Game'">
+            <template v-if="store.storeName == '2Game' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -414,7 +415,7 @@
               </v-simple-table>
             </template>
             <!-- indieGala -->
-            <template v-if="store.storeName == 'IndieGala'">
+            <template v-if="store.storeName == 'IndieGala' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -439,7 +440,7 @@
               </v-simple-table>
             </template>
             <!-- blizzard shop -->
-            <template v-if="store.storeName == 'Blizzard Shop'">
+            <template v-if="store.storeName == 'Blizzard Shop' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -464,7 +465,7 @@
               </v-simple-table>
             </template>
             <!-- all you play -->
-            <template v-if="store.storeName == 'AllYouPlay'">
+            <template v-if="store.storeName == 'AllYouPlay' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -489,7 +490,7 @@
               </v-simple-table>
             </template>
             <!-- dlGamer -->
-            <template v-if="store.storeName == 'DLGamer'">
+            <template v-if="store.storeName == 'DLGamer' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -514,7 +515,7 @@
               </v-simple-table>
             </template>
             <!-- noctre -->
-            <template v-if="store.storeName == 'Noctre'">
+            <template v-if="store.storeName == 'Noctre' && !loading">
               <v-simple-table dense>
                 <template v-slot:default>
                   <thead>
@@ -552,7 +553,9 @@
     name: 'Home',
     components: {},
     data () {
-      return {}
+      return {
+        loading: true,
+      }
     },
 
     computed: {
@@ -637,6 +640,10 @@
               this.$store.commit(nameArray[i], nameStores[i])
             }
           }
+
+          this.loading = false
+        } else {
+          this.loading = false
         }
       },
 

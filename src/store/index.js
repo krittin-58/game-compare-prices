@@ -30,6 +30,9 @@ const state = {
   allYouPlay: [],
   dlGamer: [],
   noctre: [],
+  alertConfig: {
+    action: null, email: null, gameID: null, price: 0
+  },
 }
 
 const getters = {
@@ -54,6 +57,8 @@ const getters = {
   allYouPlayDeals: (state) => state.allYouPlay.splice(0, 5),
   dlGamerDeals: (state) => state.dlGamer.splice(0, 5),
   noctreDeals: (state) => state.noctre.splice(0, 5),
+
+  listDeals: (state) => state.listDeals,
 }
 
 const mutations = {
@@ -152,9 +157,18 @@ const mutations = {
     noctre (state, data) {
       state.noctre = data 
     },
+
+    setAlertConfig (state, data) {
+      state.alertConfig = { ...data }
+    },
+
+    clearAlertConfig (state) {
+      state.alertConfig = {}
+    },
 }
 
-const actions = {}
+const actions = {
+}
 
 export default new Vuex.Store({
   state,

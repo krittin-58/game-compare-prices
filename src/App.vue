@@ -1,17 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <v-toolbar-title>Game Compare Prices</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon><v-icon>mdi-bell</v-icon></v-btn>
-    </v-app-bar>
-
+    <nav-vue :title="title"></nav-vue>
     <v-main>
       <router-view/>
     </v-main>
@@ -19,12 +8,12 @@
 </template>
 
 <script>
-
+import NavVue from './components/Nav.vue';
 export default {
   name: 'App',
-
+  components: { NavVue },
   data: () => ({
-    //
+    title: 'Game Compare Prices'
   }),
 };
 </script>
