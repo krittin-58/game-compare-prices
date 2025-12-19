@@ -387,7 +387,7 @@ manageAlertDeal({ action, email })
 1. **Development**: `npm run serve` - Hot reload server
 2. **Production**: `npm run build` - Optimized bundle
 3. **Output**: Static files in `/dist` directory
-4. **Hosting**: Can deploy to any static host (Netlify, Vercel, GitHub Pages)
+4. **Hosting**: Can deploy to any static host (Vercel, GitHub Pages, etc.)
 
 ### Environment Configuration
 - `process.env.BASE_URL`: Base URL for router
