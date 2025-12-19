@@ -179,9 +179,11 @@ The component renders individual sections for 20+ stores:
 ```
 
 **Getters:**
-- Return top 5 deals for each store (using `splice(0, 5)`)
+- Return top 5 deals for each store
 - Example: `steamDeals`, `humbleDeals`, `gogDeals`, etc.
 - `listDeals`: Returns all deals
+
+**Note**: The current implementation uses `splice(0, 5)` in getters, which mutates the state array. This should be `slice(0, 5)` to avoid side effects and comply with Vuex best practices. This is a known issue.
 
 **Mutations:**
 - `listGames`: Set games list

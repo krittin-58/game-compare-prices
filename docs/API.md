@@ -371,7 +371,7 @@ All API methods include try-catch error handling:
 ```typescript
 async getGames(params: GameParams) {
   try {
-    const response = await axios.get(`${cheapshark_endpoint_url}/games`, { params });
+    const response = await axios.get(`${cheapsharkEndpointUrl}/games`, { params });
     return response.data;
   } catch (error) {
     console.error('Error fetching games:', error);
@@ -379,6 +379,8 @@ async getGames(params: GameParams) {
   }
 }
 ```
+
+Note: In the actual implementation, the variable uses snake_case (`cheapshark_endpoint_url`) for consistency with the existing codebase, though camelCase is the JavaScript standard.
 
 **Error Types:**
 - Network errors (no connection, timeout)

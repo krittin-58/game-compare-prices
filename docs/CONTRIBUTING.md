@@ -481,9 +481,11 @@ mutations: {
 3. **Add getter**:
 ```javascript
 getters: {
-  newStoreDeals: (state) => state.newStore.splice(0, 5)
+  newStoreDeals: (state) => state.newStore.slice(0, 5)  // Use slice(), not splice()
 }
 ```
+
+**Note**: The existing codebase uses `splice()` in getters, which mutates the state array. This should be `slice()` to avoid side effects. This is a known issue that should be fixed in a future update.
 
 4. **Fetch data in HomeView** (`src/views/HomeView.vue`):
 ```javascript
@@ -528,8 +530,10 @@ import NewView from '../views/NewView.vue';
 
 ```bash
 # Kill process on port 8080
-# macOS/Linux:
-lsof -ti:8080 | xargs kill -9
+# macOS/Linux (try graceful shutdown first):
+lsof -ti:8080 | xargs kill -15
+# If process doesn't stop, force kill:
+# lsof -ti:8080 | xargs kill -9
 
 # Windows:
 netstat -ano | findstr :8080
