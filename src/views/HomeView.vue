@@ -255,7 +255,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(deal, index) in fanaticalDeals" :key="index">
+                    <tr v-for="(deal, index) in wingamestoreDeals" :key="index">
                       <td>{{ deal.title }}</td>
                       <td class="text-decoration-line-through">{{ deal.normalPrice }}</td>
                       <td><v-chip small>{{ deal.salePrice }}</v-chip></td>
@@ -562,7 +562,7 @@
       ...mapState(['listStores']),
       ...mapGetters([
         'steamDeals', 'humbleDeals', 'gamerGateDeals', 'greenManGamingDeals', 'direct2DriveDeals', 'gogDeals',
-        'originDeals', 'ubisoftDeals', 'fanaticalDeals', 'gameBilletDeals', 'voiduDeals', 'epicDeals', 'gamePlanetDeals',
+        'originDeals', 'ubisoftDeals', 'fanaticalDeals', 'wingamestoreDeals', 'gameBilletDeals', 'voiduDeals', 'epicDeals', 'gamePlanetDeals',
         'gamesloadDeals', 'twoGamesDeals', 'indieGalaDeals', 'blizzardDeals', 'allYouPlayDeals', 'dlGamerDeals', 'noctreDeals'
       ]),
 

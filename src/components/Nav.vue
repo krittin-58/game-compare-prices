@@ -9,7 +9,7 @@
       <v-spacer></v-spacer>
 
 				<v-btn outlined to="/" class="ma-1">Home</v-btn> 
-				<v-btn outlined to="/browser">Browsers</v-btn>
+				<v-btn outlined to="/browser">Browser</v-btn>
 			
 			<v-spacer></v-spacer>
 

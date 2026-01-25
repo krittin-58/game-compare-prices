@@ -7,7 +7,7 @@
 					<v-spacer></v-spacer>
 					<v-row>
 						<v-col offset="3">
-							<v-text-field v-model="searchGame" label="type you game name" outlined hide-details="auto" dense></v-text-field>
+							<v-text-field v-model="searchGame" label="type your game name" outlined hide-details="auto" dense></v-text-field>
 						</v-col>
 					</v-row>
 				</v-toolbar>

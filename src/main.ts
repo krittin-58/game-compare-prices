@@ -6,9 +6,11 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+// Type cast required due to Vue 2.7 type system limitations with plugin options
+// The shims-vue.d.ts provides proper type definitions, but Vue constructor needs explicit casting
 new Vue({
   router,
   vuetify,
   store,
   render: h => h(App)
-}).$mount('#app')
+} as any).$mount('#app')
