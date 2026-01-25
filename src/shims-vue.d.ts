@@ -26,4 +26,3 @@ declare module 'vue/types/options' {
     vuetify?: Framework
   }
 }
-
