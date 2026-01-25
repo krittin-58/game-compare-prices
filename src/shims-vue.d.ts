@@ -27,4 +27,3 @@ declare module 'vue/types/options' {
   }
 }
 
-
