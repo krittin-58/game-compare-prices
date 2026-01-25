@@ -11,4 +11,4 @@ new Vue({
   vuetify,
   store,
   render: h => h(App)
-}).$mount('#app')
+} as any).$mount('#app')
